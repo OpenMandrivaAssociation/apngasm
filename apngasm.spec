@@ -1,11 +1,11 @@
 Summary:	Create an APNG from multiple PNG files
 Name:		apngasm
-Version:	2.5
+Version:	2.6
 Release:	1
 License:	zlib
 Group:		Graphics
 URL:		http://sourceforge.net/projects/apngasm
-Source0:	http://downloads.sourceforge.net/project/apngasm/2.5/%{name}-%{version}-src.zip
+Source0:	http://downloads.sourceforge.net/project/apngasm/%{version}/%{name}-%{version}-src.zip
 Buildrequires:	zlib-devel
 BuildRequires:	libpng-devel
 BuildRequires:	pkgconfig
