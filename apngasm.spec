@@ -31,3 +31,14 @@ install -m 0644 readme.txt %{buildroot}%{_docdir}/%{name}/readme.txt
 %files 
 %doc readme.txt 
 %{_bindir}/%{name}
+
+
+%changelog
+* Fri Feb 24 2012 Alexander Khrukin <akhrukin@mandriva.org> 2.6-1
++ Revision: 780114
+- version update 2.6
+
+* Thu Jan 12 2012 Alexander Khrukin <akhrukin@mandriva.org> 2.5-1
++ Revision: 760335
+- imported package apngasm
+
