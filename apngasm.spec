@@ -1,44 +1,54 @@
+%define libname %mklibname apngasm
+%define devname %mklibname -d apngasm
+
 Summary:	Create an APNG from multiple PNG files
 Name:		apngasm
-Version:	2.6
-Release:	2
+Version:	3.1.9
+Release:	1
 License:	zlib
 Group:		Graphics
-URL:		http://sourceforge.net/projects/apngasm
-Source0:	http://downloads.sourceforge.net/project/apngasm/%{version}/%{name}-%{version}-src.zip
-Buildrequires:	zlib-devel
-BuildRequires:	libpng-devel
+URL:		https://github.com/apngasm/apngasm
+Source0:	https://github.com/apngasm/apngasm/archive/master/%{name}-%{version}.tar.gz
+Buildrequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(libpng16)
+BuildRequires:	cmake ninja
 BuildRequires:	pkgconfig
 
 %description
 create an APNG from multiple PNG files
 
-%prep
+%package -n %{libname}
+Summary:	Library for assembling APNG files from PNG files
 
-%setup -q -c apnopt
+%description -n %{libname}
+Library for assembling APNG files from PNG files
+
+%package -n %{devname}
+Summary:	Headers for the library for assembling APNG files from PNG files
+Requires:	%{libname} = %{EVRD}
+
+%description -n %{devname}
+Headers for the library for assembling APNG files from PNG files
+
+%prep
+%autosetup -p1 -n %{name}-master
+%cmake -G Ninja
 
 %build
-%make
+%ninja_build -C build
 
 %install
-mkdir -p %{buildroot}%{_bindir}/%{name}
-mkdir -p %{buildroot}%{_docdir}/%{name}
-
-install -m 0755 %{name} %{buildroot}%{_bindir}/%{name}
-install -m 0644 readme.txt %{buildroot}%{_docdir}/%{name}/readme.txt
-
+%ninja_install -C build
+mkdir -p %{buildroot}%{_datadir}
+mv %{buildroot}%{_prefix}/man %{buildroot}%{_datadir}/
 
 %files 
-%doc readme.txt 
 %{_bindir}/%{name}
+%{_mandir}/man1/apngasm.1*
 
+%files -n %{libname}
+%{_libdir}/libapngasm.so
 
-%changelog
-* Fri Feb 24 2012 Alexander Khrukin <akhrukin@mandriva.org> 2.6-1
-+ Revision: 780114
-- version update 2.6
-
-* Thu Jan 12 2012 Alexander Khrukin <akhrukin@mandriva.org> 2.5-1
-+ Revision: 760335
-- imported package apngasm
-
+%files -n %{devname}
+%{_includedir}/*.h
+%{_libdir}/pkgconfig/libapngasm.pc
