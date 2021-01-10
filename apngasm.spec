@@ -11,6 +11,7 @@ URL:		https://github.com/apngasm/apngasm
 Source0:	https://github.com/apngasm/apngasm/archive/master/%{name}-%{version}.tar.gz
 Buildrequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libpng16)
+BuildRequires:	boost-devel
 BuildRequires:	cmake ninja
 BuildRequires:	pkgconfig
 
