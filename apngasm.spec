@@ -3,12 +3,12 @@
 
 Summary:	Create an APNG from multiple PNG files
 Name:		apngasm
-Version:	3.1.9
+Version:	3.1.10
 Release:	1
 License:	zlib
 Group:		Graphics
 URL:		https://github.com/apngasm/apngasm
-Source0:	https://github.com/apngasm/apngasm/archive/master/%{name}-%{version}.tar.gz
+Source0:	https://github.com/apngasm/apngasm/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 Buildrequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libpng16)
 BuildRequires:	boost-devel
@@ -32,7 +32,7 @@ Requires:	%{libname} = %{EVRD}
 Headers for the library for assembling APNG files from PNG files
 
 %prep
-%autosetup -p1 -n %{name}-master
+%autosetup -p1 -n %{name}-%{version}
 %cmake -G Ninja
 
 %build
