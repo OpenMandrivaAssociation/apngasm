@@ -1,0 +1,25 @@
+rpm's cmake defaults set BUILD_SHARED_LIBS=ON. The untyped
+apngasm-static library then becomes a second shared library with
+OUTPUT_NAME apngasm, and ninja refuses to generate two rules for
+libapngasm.so. Build that target as a real static archive and do not
+install it.
+diff -Nurp a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -57,7 +57,7 @@ set_target_properties(${APNGASM_DYNAMIC_LIB_TARGET}
+ 
+ # Add the static library/archive
+ set(APNGASM_STATIC_LIB_TARGET apngasm-static)
+-add_library(${APNGASM_STATIC_LIB_TARGET}
++add_library(${APNGASM_STATIC_LIB_TARGET} STATIC
+   ${APNGASM_SOURCES}
+ )
+ set_target_properties(${APNGASM_STATIC_LIB_TARGET}
+@@ -107,7 +107,6 @@ endif ()
+ install(
+   TARGETS
+     ${APNGASM_DYNAMIC_LIB_TARGET}
+-    ${APNGASM_STATIC_LIB_TARGET}
+   DESTINATION ${LIB_INSTALL_DIR}
+ )
+ 
