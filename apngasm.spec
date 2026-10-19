@@ -9,6 +9,8 @@ License:	zlib
 Group:		Graphics
 URL:		https://github.com/apngasm/apngasm
 Source0:	https://github.com/apngasm/apngasm/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
+# BUILD_SHARED_LIBS=ON would turn the untyped static target into a second libapngasm.so
+Patch0:		0001-static-lib-explicit.patch
 Buildrequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libpng16)
 BuildRequires:	boost-devel
