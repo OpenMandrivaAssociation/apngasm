@@ -4,7 +4,7 @@
 Summary:	Create an APNG from multiple PNG files
 Name:		apngasm
 Version:	3.1.10
-Release:	1
+Release:	2
 License:	zlib
 Group:		Graphics
 URL:		https://github.com/apngasm/apngasm
