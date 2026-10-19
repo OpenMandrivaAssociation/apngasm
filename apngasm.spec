@@ -11,6 +11,8 @@ URL:		https://github.com/apngasm/apngasm
 Source0:	https://github.com/apngasm/apngasm/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 # BUILD_SHARED_LIBS=ON would turn the untyped static target into a second libapngasm.so
 Patch0:		0001-static-lib-explicit.patch
+# CLI must link the shared CMake target so libpng/zlib usage requirements apply
+Patch1:		0002-cli-link-shared-target.patch
 Buildrequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(libpng16)
 BuildRequires:	boost-devel
